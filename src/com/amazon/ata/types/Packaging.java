@@ -35,7 +35,7 @@ public class Packaging {
      */
 
     public boolean canFitItem(Item item) {
-        return false;
+        throw new UnsupportedOperationException("Packaging does not support canFitItem() method.");
     }
 
     /**
@@ -43,7 +43,7 @@ public class Packaging {
      * @return the mass of the packaging
      */
     public BigDecimal getMass() {
-        return BigDecimal.valueOf(0.0);
+        throw new UnsupportedOperationException("Packaging is the parent class and does not support getMass() method.");
     }
 
 

@@ -38,6 +38,9 @@ public class PrepareShipmentRequest {
     */
     private String fcCode;
 
+    /**
+     * Instantiates a PrepareShipmentRequest object with default values.
+     */
     public PrepareShipmentRequest() {
         this.asin   = "0000000000";
         this.description = "Frank Test Default Item - should not ever be needed - only used for testing";
@@ -47,7 +50,16 @@ public class PrepareShipmentRequest {
         this.fcCode = "IND1";
     }
 
-
+    /**
+     * Instantiates a PrepareShipmentRequest object with provided values.
+     *
+     * @param asin - Amazon item identifier number.
+     * @param description string description of the item.
+     * @param length - other dimension of the item
+     * @param width - the smallest dimension of the item.
+     * @param height - the longest dimension of the item.
+     * @param fcCode - Amazon fulfillment center code.
+     */
     public PrepareShipmentRequest(String asin, String description, BigDecimal length, BigDecimal width,
                                   BigDecimal height, String fcCode) {
         this.asin = asin;
@@ -58,6 +70,10 @@ public class PrepareShipmentRequest {
         this.fcCode = fcCode;
     }
 
+    /**
+     * Instantiates builder object for class.
+     * @param builder takes in a builder.
+     */
     public PrepareShipmentRequest(Builder builder) {
         this.asin = builder.asin;
         this.description = builder.description;
@@ -226,14 +242,15 @@ public class PrepareShipmentRequest {
             this.height = new BigDecimal(heightToUse);
             return this;
         }
+
         /**
         * Sets the {@code height} and returns a reference to this Builder so that the methods can be chained together.
         *
-        * @param fcCode the {@code fcCode} to set
+        * @param inputFcCode the {@code fcCode} to set
         * @return a reference to this Builder
         */
-        public Builder withFcCode(String fcCode) {
-            this.fcCode = fcCode;
+        public Builder withFcCode(String inputFcCode) {
+            this.fcCode = inputFcCode;
             return this;
         }
 
@@ -243,7 +260,7 @@ public class PrepareShipmentRequest {
         * @return a {@code Item} built with parameters of this {@code Item.Builder}
         */
         public PrepareShipmentRequest build() {
-        return new PrepareShipmentRequest(this);
+            return new PrepareShipmentRequest(this);
         }
     }
 
