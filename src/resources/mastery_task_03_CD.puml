@@ -1,0 +1,45 @@
+@startuml
+
+class ShipmentOption {
+  -item: Item
+  -packaging : Packaging
+  -fulfillmentCenter : FulfillmentCenter
+  +equals(Object)
+  +hashCode()
+}
+
+class FcPackagingOption {
+  -fulfillmentCenter : FulfillmentCenter
+  -packaging : Packaging
+}
+
+class Packaging {
+    -material : Material
+    +Packaging(material : Material)
+    +canFitItem(item : Item) : boolean
+    +getMass() : BigDecimal
+    +equals(o : Object) : boolean
+    +hashCode() : int
+}
+
+class Box {
+    -length : BigDecimal
+    -width : BigDecimal
+    -height : BigDecimal
+    +Box(material : Material, length : BigDecimal, width : BigDecimal, height : BigDecimal)
+    +canFitItem(item : Item) : boolean
+    +getMass() : BigDecimal
+}
+
+class PolyBag {
+    -volume : BigDecimal
+    +PolyBag(volume : BigDecimal)
+    +canFitItem(item : Item) : boolean
+    +getMass() : BigDecimal
+}
+
+FcPackagingOption o-- Packaging
+ShipmentOption o-- Packaging
+Packaging <|-- Box
+Packaging <|-- PolyBag
+@enduml
