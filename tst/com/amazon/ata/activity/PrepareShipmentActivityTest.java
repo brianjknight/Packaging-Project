@@ -9,6 +9,7 @@ import com.amazon.ata.types.ShipmentOption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,7 +33,7 @@ public class PrepareShipmentActivityTest {
 
     @BeforeEach
     void setUp() {
-        initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
