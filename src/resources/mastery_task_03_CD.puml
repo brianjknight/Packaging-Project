@@ -38,8 +38,14 @@ class PolyBag {
     +getMass() : BigDecimal
 }
 
+enum Material {
+    +CORRUGATE
+    +LAMINATED_PLASTIC
+}
+
 FcPackagingOption o-- Packaging
 ShipmentOption o-- Packaging
 Packaging <|-- Box
 Packaging <|-- PolyBag
+Packaging *- Material
 @enduml
