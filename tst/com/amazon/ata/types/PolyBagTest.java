@@ -20,9 +20,9 @@ public class PolyBagTest {
     public void canFitItem_itemWithLessVolumeFits_returnsTrue() {
         //GIVEN
         Item item = Item.builder()
-                .withLength(BigDecimal.valueOf(10))
-                .withWidth(BigDecimal.valueOf(10))
-                .withHeight(BigDecimal.valueOf(10))
+                .withLength(BigDecimal.valueOf(.99999999))
+                .withWidth(BigDecimal.valueOf(60))
+                .withHeight(BigDecimal.valueOf(60))
                 .build();
 
         //WHEN
@@ -83,6 +83,18 @@ public class PolyBagTest {
         Packaging otherPolyBag = new PolyBag(BigDecimal.valueOf(3600));
 
         //THEN
+        boolean result = otherPolyBag.equals(otherPolyBag);
+
+        //WHEN
+        assertTrue(result, "Expected item to be equal.");
+    }
+
+    @Test
+    public void equals_sameVolume_isTrue() {
+        //GIVEN
+        Packaging otherPolyBag = new PolyBag(BigDecimal.valueOf(3600));
+
+        //THEN
         boolean result = packaging.equals(otherPolyBag);
 
         //WHEN
@@ -101,5 +113,16 @@ public class PolyBagTest {
         assertFalse(result, "Expected item to NOT be equal.");
     }
 
+    @Test
+    public void hashcode_sameVolume_isTrue() {
+        //GIVEN
+        Packaging otherPolyBag = new PolyBag(BigDecimal.valueOf(3600));
+
+        //THEN
+        boolean result = packaging.hashCode() == otherPolyBag.hashCode();
+
+        //WHEN
+        assertTrue(result, "Expected item to be equal.");
+    }
 
 }

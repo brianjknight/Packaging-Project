@@ -3,7 +3,9 @@ package com.amazon.ata.types;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -118,7 +120,7 @@ public class BoxTest {
     }
 
     @Test
-    public void equals_sameAttributesDifferentObjects_isTrue() {
+    public void equals_sameAttributes_isTrue() {
         //GIVEN
         Packaging otherPackaging = new Box(packagingMaterial, packagingLength, packagingWidth, packagingHeight);
 
@@ -142,6 +144,29 @@ public class BoxTest {
     }
 
     @Test
+    public void equals_differentClass_isFalse() {
+        //GIVEN
+        Packaging boxPackaging = new Box(packagingMaterial, packagingLength, packagingWidth, packagingHeight);
+        Packaging polybagPackaging = new PolyBag(BigDecimal.ONE);
+        //WHEN
+        boolean result = boxPackaging.equals(polybagPackaging);
+        //THEN
+        assertFalse(result, "Expected Box & PolyBag to NOT be equal.");
+    }
+
+    @Test
+    public void equals_nullObject_isFalse() {
+        //GIVEN
+        Packaging nullPackaging = null;
+
+        //WHEN
+        boolean result = packaging.equals(nullPackaging);
+
+        //THEN
+        assertFalse(result, "Expected null object to NOT equal non-null object.");
+    }
+
+    @Test
     public void equals_differentLength_returnsFalse() {
         //GIVEN
         Packaging otherPackaging = new Box(packagingMaterial, packagingLength.add(BigDecimal.ONE), packagingWidth, packagingHeight);
@@ -153,5 +178,17 @@ public class BoxTest {
         assertFalse(result, "Expected boxes to NOT be equal.");
     }
 
+    @Test
+    public void hashCode_equalObjects_equalHash() {
+        // GIVEN
+        Packaging otherPackaging = new Box(packagingMaterial, packagingLength, packagingWidth, packagingHeight);
+
+        //WHEN
+        boolean result = packaging.hashCode() == otherPackaging.hashCode();
+
+        //THEN
+        assertTrue(result, "Expected hash codes to be equal.");
+
+    }
 
 }

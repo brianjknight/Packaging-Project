@@ -7,10 +7,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PackagingTest {
     private Material packagingMaterial = Material.CORRUGATE;
@@ -19,10 +16,40 @@ public class PackagingTest {
     private BigDecimal packagingHeight = BigDecimal.valueOf(8.1);
 
     private Packaging packaging;
+    private Packaging packaging2;
 
     @BeforeEach
     public void setUp() {
         packaging = new Box(packagingMaterial, packagingLength, packagingWidth, packagingHeight);
+        packaging2 = new Packaging(packagingMaterial);
+    }
+
+    @Test
+    public void canFitItem_callOnPackagingObject_throwsException() {
+        //GIVEN
+        Item item = Item.builder()
+                .withLength(packagingLength.add(BigDecimal.ONE))
+                .withWidth(packagingWidth)
+                .withHeight(packagingHeight)
+                .build();
+
+        //WHEN THEN
+        assertThrows(UnsupportedOperationException.class, () -> {
+            packaging2.canFitItem(item); }, "Expected calling canFitItem method on parent to throw exception.");
+    }
+
+    @Test
+    public void getMass_callOnPackagingObject_throwsException() {
+        //GIVEN
+        Item item = Item.builder()
+                .withLength(packagingLength.add(BigDecimal.ONE))
+                .withWidth(packagingWidth)
+                .withHeight(packagingHeight)
+                .build();
+
+        //WHEN THEN
+        assertThrows(UnsupportedOperationException.class, () -> {
+            packaging2.getMass(); }, "Expected calling canFitItem method on parent to throw exception.");
     }
 
     @Test
@@ -177,6 +204,7 @@ public class PackagingTest {
         // WHEN + THEN
         assertEquals(packaging.hashCode(), other.hashCode(), "Equal objects should have equal hashCodes");
     }
+
     @Test
     public void height_width_length_variables_removed_from_packaging_class() {
         Field[] fields = Packaging.class.getDeclaredFields();
