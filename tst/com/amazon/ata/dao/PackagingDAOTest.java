@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PackagingDAOTest {
 
@@ -90,6 +89,18 @@ class PackagingDAOTest {
         assertEquals(2, shipmentOptions.size(),
             "When fulfillment center has multiple packaging that can fit item, return a ShipmentOption "
                 + "for each.");
+    }
+
+    @Test
+    public void findShipmentOptions_noDuplicateItemsInReturnedList_assertsTrue() throws Exception {
+        // GIVEN
+        packagingDAO = new PackagingDAO(datastore);
+
+        //WHEN
+        List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, iad2);
+
+        //THEN
+        assertTrue(shipmentOptions.size() == 3, "Expected 3 packaging options and NOT to find duplicates in list.");
     }
 
     private Item createItem(String length, String width, String height) {
