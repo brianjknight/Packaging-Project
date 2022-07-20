@@ -1,0 +1,35 @@
+@startuml
+
+interface CostStrategy<<interface>> {
+  +getCost(ShipmentOption): ShipmentCost
+}
+
+class MonetaryCostStrategy {
+-LABOR_COST : BigDecimal
+-materialCostPerGram : Map<Material, BigDecimal>
++getCost(shipmentOption : ShipmentOption) : ShipmentCost
+}
+
+class CarbonCostStrategy {
+-carbonCostPerGram : Map<Material, BigDecimal>
++getCost(shipmentOption : ShipmentOption) : ShipmentCost
+}
+
+class WeightedCostStrategy {
+    -carbonCostStrategy : CarbonCostStrategy
+    -monetaryCostStrategy : MonetaryCostStrategy
+    -carbonCostWeight : BigDecimal
+    -monetaryCostWeight : BigDecimal
+    +getCost(shipmentOption : ShipmentOption) : ShipmentCost
+}
+class ShipmentCost {
+  -shipmentOption: ShipmentOption
+  -cost: BigDecimal
+}
+MonetaryCostStrategy *-- WeightedCostStrategy
+CarbonCostStrategy *-- WeightedCostStrategy
+CostStrategy o- ShipmentCost
+CostStrategy <|.. MonetaryCostStrategy
+CostStrategy <|.. CarbonCostStrategy
+CostStrategy <|.. WeightedCostStrategy
+@enduml

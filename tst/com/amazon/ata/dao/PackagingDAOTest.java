@@ -50,7 +50,7 @@ class PackagingDAOTest {
     }
 
     @Test
-    public void findShipmentOptions_onePackagingAvailableAndFits_singlePackaging() throws Exception {
+    public void findShipmentOptions_threePackagingAvailableAndFits_threePackaging() throws Exception {
         // GIVEN
         packagingDAO = new PackagingDAO(datastore);
 
@@ -58,7 +58,7 @@ class PackagingDAOTest {
         List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, ind1);
 
         // THEN
-        assertEquals(1, shipmentOptions.size(),
+        assertEquals(3, shipmentOptions.size(),
             "When fulfillment center has packaging that can fit item, return a ShipmentOption with the item, "
                 + "fulfillment center, and packaging that can fit the item.");
     }
@@ -78,7 +78,7 @@ class PackagingDAOTest {
     }
 
     @Test
-    public void findShipmentOptions_twoPackagingAvailableAndBothFit_twoPackagingOptions() throws Exception {
+    public void findShipmentOptions_fourPackagingAvailableAndBothFit_fourPackagingOptions() throws Exception {
         // GIVEN
         packagingDAO = new PackagingDAO(datastore);
 
@@ -86,7 +86,7 @@ class PackagingDAOTest {
         List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, abe2);
 
         // THEN
-        assertEquals(2, shipmentOptions.size(),
+        assertEquals(4, shipmentOptions.size(),
             "When fulfillment center has multiple packaging that can fit item, return a ShipmentOption "
                 + "for each.");
     }
@@ -98,9 +98,8 @@ class PackagingDAOTest {
 
         //WHEN
         List<ShipmentOption> shipmentOptions = packagingDAO.findShipmentOptions(smallItem, iad2);
-
         //THEN
-        assertTrue(shipmentOptions.size() == 3, "Expected 3 packaging options and NOT to find duplicates in list.");
+        assertTrue(shipmentOptions.size() == 4, "Expected 4 packaging options and NOT to find duplicates in list.");
     }
 
     private Item createItem(String length, String width, String height) {

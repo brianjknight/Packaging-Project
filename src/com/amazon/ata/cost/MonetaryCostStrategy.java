@@ -37,4 +37,5 @@ public class MonetaryCostStrategy implements CostStrategy {
 
         return new ShipmentCost(shipmentOption, cost);
     }
+
 }
