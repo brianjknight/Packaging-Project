@@ -38,6 +38,7 @@ class PackagingDAOTest {
         }, "When asked to ship from an unknown fulfillment center, throw UnknownFulfillmentCenterException.");
     }
 
+
     @Test
     public void findShipmentOptions_packagingDoesntFit_throwsNoPackagingFitsItemException() {
         // GIVEN
@@ -48,6 +49,7 @@ class PackagingDAOTest {
             packagingDAO.findShipmentOptions(testItem, ind1);
         }, "When no packaging can fit the item, throw NoPackagingFitsItemException.");
     }
+
 
     @Test
     public void findShipmentOptions_threePackagingAvailableAndFits_threePackaging() throws Exception {
