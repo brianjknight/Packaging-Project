@@ -44,7 +44,7 @@ public class PrepareShipmentActivityTest {
 
         // WHEN
         String response = activity.handleRequest(request, null);
-
+        System.out.println("response first test = " + response);
         // THEN
         assertNull(response);
     }
@@ -60,7 +60,7 @@ public class PrepareShipmentActivityTest {
         // WHEN
         // PrepareShipmentResponse response = activity.handleRequest(request);
         String response = activity.handleRequest(request, null);
-
+        System.out.println("response second test = " + response);
 
         // THEN
         //assertNotNull(response.getAttributes());
